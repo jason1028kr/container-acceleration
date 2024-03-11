@@ -21,7 +21,7 @@ data:
        fi
     fi
     sudo apt-get update
-    
+
     pushd /tmp || exit 1
     UBUNTU_RELEASE=$(lsb_release -r -s)
     UBUNTU_VERSION_CLEANED="${UBUNTU_RELEASE//.}"
@@ -39,12 +39,12 @@ data:
     sudo /opt/acr/tools/overlaybd/install.sh
     sudo /opt/acr/tools/overlaybd/enable-http-auth.sh
     modprobe target_core_user
-    
+
 
     # Enabling mirror for teleportmetricstest
     curl -X PUT 'localhost:8578/config?ns=_default&enable_suffix=azurecr.io&stream_format=overlaybd&enable_containerd=true'
     sudo /opt/acr/tools/overlaybd/enable.sh
-    
+
     touch /opt/sentinel
     systemctl restart containerd
 ---
@@ -66,7 +66,7 @@ spec:
       hostNetwork: true
       hostPID: true
       containers:
-      - image: docker.io/alexeldeib/nsenter:latest # https://github.com/alexeldeib/azbench/blob/main/images/nsenter/entrypoint.sh
+      - image: docker.io/jason1028kr/nsenter:latest # https://github.com/alexeldeib/azbench/blob/main/images/nsenter/entrypoint.sh
         imagePullPolicy: Always
         name: *name
         args: ["teleportinstall"]
